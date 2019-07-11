@@ -1,10 +1,11 @@
 package com.visa.prj.client;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import com.visa.prj.entity.Product;
 
@@ -17,7 +18,14 @@ public class ListClient {
 		products.add(new Product(5,"Sony Bravia",125000.00,"tv",900));
 		products.add(new Product(912,"One Plus",32000.00,"mobile",100));
 		products.add(new Product(88,"HP Printer",19000.00,"computer",100));	 
-		Collections.sort(products);
+		
+		Map <String, List<Product>> map  = products.stream().collect(Collectors.groupingBy(p-> p.getCategory()));
+		
+		map.forEach((k,v) -> {
+			System.out.println(k);
+			v.forEach(System.out :: println);
+		});
+//		Collections.sort(products);
 //		for (Product p : products) {
 //			System.out.println(p);
 //		}
